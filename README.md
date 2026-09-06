@@ -81,5 +81,19 @@ Eloquent va générer une requête SQL équivalente, approximativement :
 
 SELECT * FROM salles;
 
+## Etape 2 Questions
+
+# 1 Une migration sert à créer ou modifier la structure de la base de données, tandis qu'un seeder sert à insérer des données initiales ou de référence dans les tables.
+
+## 2.​ Pourquoi les données initiales doivent-elles être reproductibles ?
+
+Les données initiales doivent être reproductibles afin de pouvoir réinitialiser ou préparer l'environnement de développement plusieurs fois sans créer de données incohérentes ou de doublons.
+
+## 3.​ Comment empêcher les doublons ?
+
+Eloquent fournit firstOrCreate(), qui recherche d'abord une salle par son nom et ne la crée que si elle n'existe pas.
+
+
+# seed.php sera un script exécutable qui charge la configuration Eloquent puis crée les données initiales de notre application.
 
 
