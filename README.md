@@ -117,3 +117,36 @@ Parce que le validateur doit avoir une seule responsabilité : vérifier les don
 
 ## 4.Comment retourner plusieurs erreurs en une seule fois ?
 On collecte les erreurs dans un tableau $errors et on les retourne toutes dans ValidationResult au lieu de s'arrêter à la première.
+
+## Questions ETAPE 6
+
+# 1. Quelle différence existe entre DTO et modèle Eloquent ?
+
+-- Le DTO sert à transporter des données entre les différentes couches de l'application.
+
+-- Le modèle Eloquent représente une donnée qui correspond à une table de la base de données et permet notamment de communiquer avec celle-ci.
+
+# 2. Pourquoi le DTO ne doit-il pas appeler save() ?
+
+Cela violerait notamment le principe SRP (Single Responsibility Principle). Parce que save() appartient à la responsabilité de la persistance des données, pas du transport.
+
+Parce que save() appartient à la responsabilité de la persistance des données, pas du transport.
+
+
+## 3. À quel moment transforme-t-on les chaînes en dates ?
+
+Les données provenant de $_POST sont généralement des chaînes de caractères.
+
+Par exemple : $_POST['date_debut']
+
+Avant de construire le DTO, on transforme cette chaîne en :
+
+new DateTimeImmutable($_POST['date_debut'])
+
+Le DTO reçoit donc directement : DateTimeImmutable
+
+Cela permet au service de travailler avec un objet date plutôt qu'avec une chaîne brute.
+
+## 4. Le DTO doit-il contenir la règle de chevauchement ?
+
+-- Le DTO ne contient pas la règle de chevauchement. C'est une règle métier qui sera traitée dans le service.
