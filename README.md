@@ -48,7 +48,38 @@ On versionne composer.lock afin que tous les développeurs et les environnements
 
 On ne versionne pas vendor/ car ce dossier contient des dépendances générées automatiquement par Composer. Il peut être volumineux et n'est pas nécessaire dans Git puisque composer install permet de le recréer à partir de composer.json et composer.lock
 
+## Etape 2 Questions
 
+## 1.​ Quel rôle joue Capsule\Manager ?
+
+Capsule\Manager permet de configurer la connexion à la base de données et de démarrer Eloquent dans une application PHP qui n'utilise pas Laravel. Il reçoit les paramètres de connexion puis initialise Eloquent avec ces paramètres.
+# Capsule configure → Eloquent fonctionne → MySQL stocke les données.
+
+
+## 2.​ Pourquoi Eloquent peut-il fonctionner sans Laravel ?
+
+Parce qu’Eloquent est une bibliothèque PHP indépendante du framework Laravel.
+
+
+## 3.​ Où doit se trouver le démarrage de l’ORM ?
+Le démarrage de l’ORM doit être centralisé dans le fichier de configuration de la base de données, ici config/database.php. 
+
+
+## 4.​ Quelle différence existe entre ORM et SQL écrit à la main ?
+# Avec du SQL 
+
+On écrit directement la requête SQL. Par exemple
+
+$stmt = $pdo->query('SELECT * FROM salles');
+
+$salles = $stmt->fetchAll();
+
+# Avec un ORM comme Eloquent
+Avec Eloquent, on manipule principalement des objets et des classes PHP . Par exemple :
+$salles = Salle::all();
+Eloquent va générer une requête SQL équivalente, approximativement :
+
+SELECT * FROM salles;
 
 
 
