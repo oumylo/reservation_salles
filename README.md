@@ -96,4 +96,24 @@ Eloquent fournit firstOrCreate(), qui recherche d'abord une salle par son nom et
 
 # seed.php sera un script exécutable qui charge la configuration Eloquent puis crée les données initiales de notre application.
 
+## Questions ETAPE 5
 
+## 1.​ Pourquoi séparer la validation syntaxique des règles métier ?
+
+-- Cela respecte le principe SRP (Single Responsibility Principle) : chaque classe doit avoir une responsabilité claire.
+
+--La validation syntaxique vérifie que les données ont le bon format : email valide, entier positif, chaîne de caractères, date valide, etc.
+
+-- Les règles métier vérifient les règles propres au fonctionnement de l'application : par exemple, vérifier que date_fin > date_debut ou qu'une salle n'est pas déjà réservée.
+
+## 2. Pourquoi créer une interface de validation ?
+
+L'interface ValidatorInterface définit un contrat commun pour tous les validateurs.
+Grâce à cette interface, SalleValidator et ReservationValidator utilisent la même méthode validate().
+
+## 3. Pourquoi le validateur ne doit-il pas enregistrer les données ?
+
+Parce que le validateur doit avoir une seule responsabilité : vérifier les données.
+
+## 4.Comment retourner plusieurs erreurs en une seule fois ?
+On collecte les erreurs dans un tableau $errors et on les retourne toutes dans ValidationResult au lieu de s'arrêter à la première.
